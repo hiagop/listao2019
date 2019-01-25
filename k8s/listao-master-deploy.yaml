@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: listao-master
+    namespace: test
+    labels:
+        app: listao-master
+spec:
+    replicas: 5
+    selector:
+        matchLabels:
+            app: listao-master
+    template:
+        metadata:
+            labels:
+                app: listao-master
+        spec:
+            containers:
+            - name: listao-master
+              image: hiagop/listao2019:master
+              imagePullPolicy: Always
+              ports:
+                  - name: http
+                    containerPort: 80
+              volumeMounts:
+                  - name: nginx-conf
+                    mountPath: /etc/nginx
+            imagePullSecrets:
+            - name: dockerhub-hiagop    
+            volumes:
+                - name: nginx-conf
+                  configMap:
+                      name: nginx-listao-cm
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: listao-master-svc
+    namespace: test
+spec:
+    selector:
+        app: listao-master
+    ports:
+        - name: http
+          protocol: TCP
+          port: 80
+          targetPort: 80
+

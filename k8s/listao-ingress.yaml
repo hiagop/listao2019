@@ -1,16 +1,15 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: listao-test
+  name: listao2019
   namespace: test
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    #    nginx.org/ssl-services: "listao-test-svc"
 spec:
   rules:
     - host: listao2019.ufpa.br
       http:
         paths:
           - backend:
-              serviceName: listao-test-svc
+              serviceName: listao-master-svc
               servicePort: 80

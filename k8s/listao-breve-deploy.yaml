@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: listao-test
+    name: listao-breve
     namespace: test
     labels:
-        app: listao-test
+        app: listao-breve
 spec:
     replicas: 5
     selector:
         matchLabels:
-            app: listao-test
+            app: listao-breve
     template:
         metadata:
             labels:
-                app: listao-test
+                app: listao-breve
         spec:
             containers:
-            - name: listao-test
-              image: hiagop/listao2019:master
+            - name: listao-breve
+              image: hiagop/listao2019:em-breve
               imagePullPolicy: Always
               ports:
                   - name: http
@@ -36,11 +36,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: listao-test-svc
+    name: listao-breve-svc
     namespace: test
 spec:
     selector:
-        app: listao-test
+        app: listao-breve
     ports:
         - name: http
           protocol: TCP
