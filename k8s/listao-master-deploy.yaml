@@ -18,7 +18,7 @@ spec:
             containers:
             - name: listao-master
               image: hiagop/listao2019:master
-              imagePullPolicy: Always
+              #              imagePullPolicy: Always
               ports:
                   - name: http
                     containerPort: 80
